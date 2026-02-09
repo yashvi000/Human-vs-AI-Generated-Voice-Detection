@@ -1,0 +1,13 @@
+torch
+transformers
+librosa
+soundfile
+numpy
+scikit-learn
+fastapi
+uvicorn
+pydantic
+requests
+audioread
+huggingface-hub
+dotenv
