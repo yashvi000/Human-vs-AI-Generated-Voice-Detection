@@ -10,4 +10,4 @@ pydantic
 requests
 audioread
 huggingface-hub
-pyhton-dotenv
+python-dotenv
