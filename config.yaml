@@ -2,13 +2,23 @@ paths:
   dataset_path: VALIDATION
   classifier_path: model/classifier.pth
 
+api:
+  timeout_sec: 10
+  languages: 
+  - "Tamil"
+  - "English"
+  - "Hindi"
+  - "Malayalam"
+  - "Telugu"
+
 preprocess:
   min_duration_sec: 1.0
   rms_threshold: 0.01
   clip_pct_max: 2.0
+  target_sample_rate: 16000
 
 training:
-  beseline:
+  baseline:
     batch_size: 8
     epochs: 3
     learning_rate: 0.0001
