@@ -1,4 +1,6 @@
 .env
+voice_detection
 __pycache__/
 *.pyc
 .vscode
+logs/*.log
