@@ -11,3 +11,5 @@ requests
 audioread
 huggingface-hub
 python-dotenv
+pydub
+ffmpeg-python
