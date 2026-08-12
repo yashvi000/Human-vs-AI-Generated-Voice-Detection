@@ -5,7 +5,7 @@ import requests
 import os
 from dotenv import load_dotenv
 from model.detector import predict_audio
-from audio.preprocess import load_audio
+from audio.preprocess import validate_audio_with_message
 
 # Checking API status
 """
@@ -32,14 +32,11 @@ languages = {
 
 #Request
 class VoiceDetectionRequest(BaseModel):
-    language: str | None = None
+    language: str
     audioFormat: str
     audioBase64: str | None = None
     audioUrl: str | None = None  # for MP3 URL
-    message: str | None = None  
-    
-    class Config:
-        extra = "allow"
+ 
 
 # Response
 class VoiceDetectionResponse(BaseModel):
@@ -90,7 +87,9 @@ def detect_voice(
 
     if request.audioBase64:
         try:
-            audio_bytes = base64.b64decode(request.audioBase64)
+            b64 = base64.b64decode(request.audioBase64)
+            b64 += "=" * (4 - len(b64) % 4)   # padding
+            audio_bytes = base64.b64decode(b64)
         except Exception:
             raise HTTPException(
                 status_code=400,
@@ -115,7 +114,10 @@ def detect_voice(
         )
 
     # plugging ML model
-    audio_tensor = load_audio(audio_bytes)
+    is_valid, audio_tensor, error_message = validate_audio_with_message(audio_bytes)
+    if not is_valid:
+        raise HTTPException(status_code=400, detail=error_message)
+    
     result = predict_audio(audio_tensor)
 
     if "error" in result:

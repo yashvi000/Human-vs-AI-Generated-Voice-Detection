@@ -1,0 +1,18 @@
+paths:
+  dataset_path: VALIDATION
+  classifier_path: model/classifier.pth
+
+preprocess:
+  min_duration_sec: 1.0
+  rms_threshold: 0.01
+  clip_pct_max: 2.0
+
+training:
+  beseline:
+    batch_size: 8
+    epochs: 3
+    learning_rate: 0.0001
+    threshold: 0.5
+  
+  tuned:
+    threshold: 0
