@@ -5,7 +5,7 @@ import requests
 import os
 from dotenv import load_dotenv
 from model.detector import predict_audio
-from audio.preprocess import validate_audio_with_message
+from audio.preprocess import preprocess_audio
 from pathlib import Path
 import yaml
 import time
@@ -153,7 +153,7 @@ def detect_voice(
         )
 
     # Audio validation and preprocessing
-    is_valid, audio_tensor, error_message = validate_audio_with_message(audio_bytes)
+    is_valid, audio_tensor, error_message = preprocess_audio(audio_bytes)
 
     if not is_valid:
         logger.error(f"Audio validation failed : {error_message}")

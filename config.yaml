@@ -15,6 +15,7 @@ preprocess:
   min_duration_sec: 1.0
   rms_threshold: 0.01
   clip_pct_max: 2.0
+  clip_sample_threshold: 0.99
   target_sample_rate: 16000
 
 training:
